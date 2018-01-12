@@ -5,5 +5,3 @@ ENV CDH_PARCEL http://archive.cloudera.com/cdh5/parcels/5.9.3/CDH-5.9.3-1.cdh5.9
 
 RUN mkdir /cdh
 RUN wget -qO- $CDH_PARCEL | tar xz -C /cdh --strip 1
-
-WORKDIR /cdh
