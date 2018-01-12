@@ -1,3 +1,5 @@
+#cdh repo key did not work at the time of writing this file: https://www.cloudera.com/documentation/enterprise/5-11-x/topics/cdh_ig_cdh5_install.html#topic_4_4_2
+#hence the whole tarball
 #FROM openjdk:8-jre-alpine3.7
 FROM solr:7.2
 
