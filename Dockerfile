@@ -1,12 +1,19 @@
-#cdh repo key did not work at the time of writing this file: https://www.cloudera.com/documentation/enterprise/5-11-x/topics/cdh_ig_cdh5_install.html#topic_4_4_2
-#hence the whole tarball
-#FROM openjdk:8-jre-alpine3.7
 FROM solr:7.2
 
-ENV CDH_PARCEL http://archive.cloudera.com/cdh5/parcels/5.9.3/CDH-5.9.3-1.cdh5.9.3.p0.4-trusty.parcel
-
 USER root
-RUN mkdir /cdh
-RUN wget -qO- $CDH_PARCEL | tar xz -C /cdh --strip 1
-RUN chown solr /cdh -R
+
+#invalid repos on CLoduera's site
+#RUN wget "https://archive.cloudera.com/cdh5/debian/wheezy/amd64/cdh/cloudera.list" -O /etc/apt/sources.list.d/cloudera.list
+RUN printf "deb http://archive.cloudera.com/cdh5/debian/jessie/amd64/cdh jessie-cdh5.9.3 contrib" >> /etc/apt/sources.list.d/cloudera.list
+RUN printf "deb-src http://archive.cloudera.com/cdh5/debian/jessie/amd64/cdh jessie-cdh5.9.3 contrib" >> /etc/apt/sources.list.d/cloudera.list
+#RUN apt-key adv  --keyserver pgp.mit.edu --recv 02A818DD
+RUN apt-get update
+
+#RUN printf "Package: * \nPin: release o=Cloudera, l=Cloudera \nPin-Priority: 501" > /etc/apt/preferences.d/cloudera.pref
+#RUN wget https://archive.cloudera.com/cdh5/debian/wheezy/amd64/cdh/archive.key -O archive.key && apt-key add archive.key
+
+RUN wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u7_amd64.deb
+RUN dpkg -i libssl1.0.0_1.0.1t-1+deb8u7_amd64.deb
+RUN apt-get install --allow-unauthenticated -y parquet hadoop-mapreduce hadoop-client hadoop hadoop-0.20-mapreduce libssl1.0.2 hbase-solr
+
 USER solr
