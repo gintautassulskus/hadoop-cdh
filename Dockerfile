@@ -14,6 +14,8 @@ RUN apt-get update
 
 RUN wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u7_amd64.deb
 RUN dpkg -i libssl1.0.0_1.0.1t-1+deb8u7_amd64.deb
-RUN apt-get install --allow-unauthenticated -y parquet hadoop-mapreduce hadoop-client hadoop hadoop-0.20-mapreduce libssl1.0.2 hbase-solr
+RUN apt-get install -y openjdk-8-jdk
+RUN apt-get install --allow-unauthenticated -y hadoop-client hadoop
+#RUN apt-get install --allow-unauthenticated -y parquet hadoop-mapreduce hadoop-client hadoop hadoop-0.20-mapreduce libssl1.0.2 hbase-solr
 
 USER solr
