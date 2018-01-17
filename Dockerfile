@@ -4,8 +4,8 @@ USER root
 
 #invalid repos on CLoduera's site
 #RUN wget "https://archive.cloudera.com/cdh5/debian/wheezy/amd64/cdh/cloudera.list" -O /etc/apt/sources.list.d/cloudera.list
-RUN printf "deb http://archive.cloudera.com/cdh5/debian/jessie/amd64/cdh jessie-cdh5.9 contrib" >> /etc/apt/sources.list.d/cloudera.list
-RUN printf "deb-src http://archive.cloudera.com/cdh5/debian/jessie/amd64/cdh jessie-cdh5.9 contrib" >> /etc/apt/sources.list.d/cloudera.list
+RUN printf "deb http://archive.cloudera.com/cdh5/debian/jessie/amd64/cdh jessie-cdh5.9.3 contrib" >> /etc/apt/sources.list.d/cloudera.list
+RUN printf "deb-src http://archive.cloudera.com/cdh5/debian/jessie/amd64/cdh jessie-cdh5.9.3 contrib" >> /etc/apt/sources.list.d/cloudera.list
 #RUN apt-key adv  --keyserver pgp.mit.edu --recv 02A818DD
 RUN apt-get update
 
