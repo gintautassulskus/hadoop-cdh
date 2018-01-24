@@ -17,4 +17,11 @@ RUN dpkg -i libssl1.0.0_1.0.1t-1+deb8u7_amd64.deb
 RUN apt-get install -y openjdk-8-jdk
 RUN apt-get install --allow-unauthenticated -y parquet hadoop-mapreduce hadoop-client hadoop hadoop-0.20-mapreduce libssl1.0.2 hbase-solr
 
+#for Solr 6.5 and CDH 5.9 compatibility
+ENV HADOOP_CLASSPATH $HADOOP_CLASSPATH:/usr/share/java/slf4j-simple.jar
+RUN rm /usr/lib/hadoop/lib/httpclient-4.2.5.jar
+RUN rm /usr/lib/hadoop/lib/httpcore-4.2.5.jar
+RUN wget http://central.maven.org/maven2/org/apache/httpcomponents/httpclient/4.4.1/httpclient-4.4.1.jar -P /usr/lib/hadoop/lib/
+RUN wget http://central.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.1/httpcore-4.4.1.jar -P /usr/lib/hadoop/lib/
+
 USER solr
