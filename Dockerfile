@@ -18,6 +18,8 @@ RUN apt-get install -y openjdk-8-jdk
 RUN apt-get install --allow-unauthenticated -y parquet hadoop-mapreduce hadoop-client hadoop hadoop-0.20-mapreduce libssl1.0.2 hbase-solr
 
 #for Solr 6.5 and CDH 5.9 compatibility
+#enable hbase-indexer logging in unsupported OSes, e.g. debian 9 (on 8 should work without this)
+#httpclient and httpcore lib version mismatch between hadoop and solr causes runtime errros. use 4.4.1
 ENV HADOOP_CLASSPATH $HADOOP_CLASSPATH:/usr/share/java/slf4j-simple.jar
 RUN rm /usr/lib/hadoop/lib/httpclient-4.2.5.jar
 RUN rm /usr/lib/hadoop/lib/httpcore-4.2.5.jar
