@@ -20,10 +20,12 @@ RUN apt-get install --allow-unauthenticated -y parquet hadoop-mapreduce hadoop-c
 #for Solr 6.5 and CDH 5.9 compatibility
 #enable hbase-indexer logging in unsupported OSes, e.g. debian 9 (on 8 should work without this)
 #httpclient and httpcore lib version mismatch between hadoop and solr causes runtime errros. use 4.4.1
-ENV HADOOP_CLASSPATH $HADOOP_CLASSPATH:/usr/share/java/slf4j-simple.jar
 RUN rm /usr/lib/hadoop/lib/httpclient-4.2.5.jar
 RUN rm /usr/lib/hadoop/lib/httpcore-4.2.5.jar
 RUN wget http://central.maven.org/maven2/org/apache/httpcomponents/httpclient/4.4.1/httpclient-4.4.1.jar -P /usr/lib/hadoop/lib/
 RUN wget http://central.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.1/httpcore-4.4.1.jar -P /usr/lib/hadoop/lib/
+
+RUN mkhomedir_helper solr
+RUN echo "$HADOOP_CLASSPATH:/usr/share/java/slf4j-simple.jar" > /home/solr/.bash_profile
 
 USER solr
