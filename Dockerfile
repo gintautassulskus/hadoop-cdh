@@ -26,6 +26,7 @@ RUN wget http://central.maven.org/maven2/org/apache/httpcomponents/httpclient/4.
 RUN wget http://central.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.1/httpcore-4.4.1.jar -P /usr/lib/hadoop/lib/
 
 RUN mkhomedir_helper solr
-RUN echo "$HADOOP_CLASSPATH:/usr/share/java/slf4j-simple.jar" > /home/solr/.bash_profile
+RUN wget http://central.maven.org/maven2/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar -P /usr/share/java/
+RUN echo 'export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:/usr/share/java/slf4j-simple-1.7.25.jar' > /home/solr/.bash_profile
 
 USER solr
